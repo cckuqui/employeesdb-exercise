@@ -11,10 +11,10 @@ CREATE TABLE "employees" (
      )
 );
 
-CREATE TABLE "deparments" (
+CREATE TABLE "departments" (
     "dept_no" varchar NOT NULL,
     "dept_name" varchar NOT NULL,
-    CONSTRAINT "pk_deparments" PRIMARY KEY (
+    CONSTRAINT "pk_departments" PRIMARY KEY (
         "dept_no"
      )
 );
@@ -49,7 +49,7 @@ CREATE TABLE "titles" (
 
 -- Add foreing keys to tables
 ALTER TABLE "dept_manager" ADD CONSTRAINT "fk_dept_manager_dept_no" FOREIGN KEY("dept_no")
-REFERENCES "deparments" ("dept_no");
+REFERENCES "departments" ("dept_no");
 
 ALTER TABLE "dept_manager" ADD CONSTRAINT "fk_dept_manager_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "employees" ("emp_no");
@@ -58,7 +58,7 @@ ALTER TABLE "dept_emp" ADD CONSTRAINT "fk_dept_emp_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "employees" ("emp_no");
 
 ALTER TABLE "dept_emp" ADD CONSTRAINT "fk_dept_emp_dept_no" FOREIGN KEY("dept_no")
-REFERENCES "deparments" ("dept_no");
+REFERENCES "departments" ("dept_no");
 
 ALTER TABLE "salaries" ADD CONSTRAINT "fk_salaries_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "employees" ("emp_no");
@@ -90,7 +90,7 @@ from employees e
 left join (
 	select 
        emp_no, 
-       salary, 
+       salary,  -- ERROR:  column "salaries.salary" must appear in the GROUP BY clause or be used in an aggregate function
        max(to_date) 
     from salaries 
     group by emp_no) s
@@ -111,7 +111,7 @@ select
    dm.from_date, 
    dm.to_date
 from dept_manager dm
-left join deparments d
+left join departments d
 on dm.dept_no = d.dept_no
 left join employees e
 on dm.emp_no = e.emp_no; -- missing last manager
@@ -125,16 +125,39 @@ select
 from employees e
 left join dept_emp de
 on e.emp_no = de.emp_no
-left join deparments d
+left join departments d
 on de.dept_no = d.dept_no; --missing last employement
 
 -- Question 5 = List all employees whose first name is "Hercules" and last names begin with "B."
-
+select * from employees
+where first_name = 'Hercules' 
+and last_name = 'B%'; -- it's not working! WTH!
 
 -- Question 6 = List all employees in the Sales department, including their employee number, last name, first name, and department name.
-
+select 
+   e.emp_no, 
+   e.last_name, 
+   e.first_name, 
+   d.dept_name
+from employees e
+left join dept_emp de
+on e.emp_no = de.emp_no
+left join departments d
+on de.dept_no = d.dept_no
+where d.dept_name='Sales'; --missing last employement
 
 -- Question 7 = List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
-
+select 
+   e.emp_no, 
+   e.last_name, 
+   e.first_name, 
+   d.dept_name
+from employees e
+left join dept_emp de
+on e.emp_no = de.emp_no
+left join departments d
+on de.dept_no = d.dept_no
+where d.dept_name='Sales'
+or d.dept_name='Development'; --missing last employement
 
 -- Question 8 = In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
