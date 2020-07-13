@@ -98,4 +98,4 @@ The resources contains 6 cvs files, all of them containing employees information
 
 ## Copyright
 
-Photo by [Rob Gonyea](https://www.freeimages.com/photographer/rob_gonyea-59290) from [FreeImages](https://freeimages.com/).
+First photo 'Employees Only' was taken by [Rob Gonyea](https://www.freeimages.com/photographer/rob_gonyea-59290) and was retrived from [FreeImages](https://freeimages.com/).
