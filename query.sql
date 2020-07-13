@@ -50,24 +50,24 @@ and last_name like 'B%';
 
 -- List all employees in the Sales department: employee number, last name, first name, and department name.
 select 
-   ede.emp_no, 
-   ede.last_name, 
-   ede.first_name, 
-   ede.dept_name
+   e.emp_no, 
+   e.last_name, 
+   e.first_name, 
+   d.dept_name
 from employees e
 inner join dept_emp de
 on e.emp_no = de.emp_no
 inner join departments d
 on de.dept_no = d.dept_no
-where ede.dept_name='Sales'
+where d.dept_name = 'Sales'
 order by e.emp_no;
 
 -- List all employees in the Sales and Development departments: employee number, last name, first name, and department name.
 select 
-   ede.emp_no, 
-   ede.last_name, 
-   ede.first_name, 
-   ede.dept_name
+   e.emp_no, 
+   e.last_name, 
+   e.first_name, 
+   d.dept_name
 from employees e
 inner join dept_emp de
 on e.emp_no = de.emp_no
