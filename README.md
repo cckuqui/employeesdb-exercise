@@ -93,8 +93,9 @@ The resources contains 6 cvs files, all of them containing employees information
     ![histogram](Images/histogram.png)
 
   * Create a bar chart of average salary by title.
-    
+
     ![barchart](Images/barchart.png)
 
-### Copyright
-Photo by <https://www.freeimages.com/photographer/rob_gonyea-59290>Rob Gonyea from <https://freeimages.com/>FreeImages
+## Copyright
+
+Photo by [Rob Gonyea](https://www.freeimages.com/photographer/rob_gonyea-59290) from [FreeImages](https://freeimages.com/).
